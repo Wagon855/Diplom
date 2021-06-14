@@ -1,0 +1,584 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BolotinTourModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ApplicationStatus">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" Nullable="false" />
+    <Property Name="StatusName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FIO" Type="varchar" MaxLength="100" />
+    <Property Name="Passport" Type="varchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="RegisterDate" Type="date" />
+    <Property Name="Policy" Type="varchar" MaxLength="50" />
+    <Property Name="Gender" Type="varchar" MaxLength="1" />
+    <Property Name="InternationalPass" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ContractClient">
+    <Key>
+      <PropertyRef Name="ContractCode" />
+    </Key>
+    <Property Name="ContractCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContractNumber" Type="varchar" MaxLength="50" />
+    <Property Name="ContractDate" Type="date" />
+    <Property Name="ContractPrice" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Country" Type="varchar" MaxLength="50" />
+    <Property Name="HotelName" Type="varchar" MaxLength="50" />
+    <Property Name="ContractEmployerCode" Type="varchar" MaxLength="50" />
+    <Property Name="ClientCode" Type="int" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryCode" />
+    </Key>
+    <Property Name="CountryCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Flag" Type="binary" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="INN" Type="varchar" MaxLength="50" />
+    <Property Name="KPP" Type="varchar" MaxLength="50" />
+    <Property Name="ОГРН" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Employer">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Surname" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Patronymic" Type="varchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+    <Property Name="Position" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Hotel">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="PartnerCode" Type="int" />
+    <Property Name="Stars" Type="int" />
+    <Property Name="CountryCode" Type="int" />
+    <Property Name="CodeHotelPhoto" Type="int" />
+    <Property Name="CodeHotelReview" Type="int" />
+    <Property Name="Place" Type="int" />
+    <Property Name="Adress" Type="varchar" MaxLength="100" />
+    <Property Name="Parking" Type="varchar" MaxLength="50" />
+    <Property Name="Transfer" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="HotelPhoto">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodeHotel" Type="int" />
+    <Property Name="Preview" Type="binary" MaxLength="50" />
+    <Property Name="PhotoLink" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="HotelReview">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodeHotel" Type="int" />
+    <Property Name="ClientCode" Type="int" Nullable="false" />
+    <Property Name="Review" Type="varchar" MaxLength="1000" />
+    <Property Name="PhotoReview" Type="binary" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Partner">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Adress" Type="varchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+    <Property Name="MainContract" Type="int" />
+    <Property Name="PartnerType" Type="int" />
+  </EntityType>
+  <EntityType Name="PartnerContract">
+    <Key>
+      <PropertyRef Name="ContractCode" />
+    </Key>
+    <Property Name="ContractCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodePartner" Type="int" />
+    <Property Name="ContractDate" Type="date" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="DateExpiration" Type="date" />
+  </EntityType>
+  <EntityType Name="PartnerType">
+    <Key>
+      <PropertyRef Name="CodePartner" />
+    </Key>
+    <Property Name="CodePartner" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodeReservation" Type="varchar" MaxLength="50" />
+    <Property Name="FIO" Type="varchar" MaxLength="100" />
+    <Property Name="ArrivalDate" Type="date" />
+    <Property Name="Room" Type="int" />
+    <Property Name="Days" Type="int" />
+    <Property Name="Nights" Type="int" />
+    <Property Name="PricePerNight" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="ReservationPrice" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="HotelName" Type="varchar" MaxLength="50" />
+    <Property Name="FoodType" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="200" />
+    <Property Name="CodePartner" Type="int" />
+    <Property Name="CodeHotel" Type="int" />
+    <Property Name="PartnerPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tour">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TourName" Type="varchar" MaxLength="100" />
+    <Property Name="TourDescription" Type="varchar" MaxLength="1000" />
+    <Property Name="Photo" Type="binary" MaxLength="50" />
+    <Property Name="TourType" Type="int" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="HotelCode" Type="int" />
+  </EntityType>
+  <EntityType Name="TourApplication">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="CodeClient" Type="int" />
+    <Property Name="CodeContractClient" Type="int" />
+    <Property Name="CodePartner" Type="int" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="ApplicationStatus" Type="int" />
+    <Property Name="Commentary" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="TourService">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ToControl" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TourType">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="TourTypeDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Photo" Type="binary" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="VoucherApplication">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodeApplication" Type="int" />
+    <Property Name="DateApplication" Type="date" />
+    <Property Name="CodeClient" Type="int" />
+    <Property Name="CodeClientContract" Type="int" />
+    <Property Name="CodeService" Type="int" />
+    <Property Name="Voucher" Type="binary" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Client_Gender">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="Gender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractClient_Employer">
+    <End Role="Employer" Type="Self.Employer" Multiplicity="0..1" />
+    <End Role="ContractClient" Type="Self.ContractClient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employer">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="ContractClient">
+        <PropertyRef Name="ContractEmployerCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hotel_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryCode" />
+      </Principal>
+      <Dependent Role="Hotel">
+        <PropertyRef Name="CountryCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hotel_Partner">
+    <End Role="Partner" Type="Self.Partner" Multiplicity="0..1" />
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Partner">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Hotel">
+        <PropertyRef Name="PartnerCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HotelPhoto_Hotel">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+    <End Role="HotelPhoto" Type="Self.HotelPhoto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="HotelPhoto">
+        <PropertyRef Name="CodeHotel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HotelReview_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="HotelReview" Type="Self.HotelReview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="HotelReview">
+        <PropertyRef Name="ClientCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HotelReview_Hotel">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+    <End Role="HotelReview" Type="Self.HotelReview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="HotelReview">
+        <PropertyRef Name="CodeHotel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Partner_PartnerType">
+    <End Role="PartnerType" Type="Self.PartnerType" Multiplicity="0..1" />
+    <End Role="Partner" Type="Self.Partner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PartnerType">
+        <PropertyRef Name="CodePartner" />
+      </Principal>
+      <Dependent Role="Partner">
+        <PropertyRef Name="PartnerType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PartnerContract_Partner">
+    <End Role="Partner" Type="Self.Partner" Multiplicity="0..1" />
+    <End Role="PartnerContract" Type="Self.PartnerContract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Partner">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="PartnerContract">
+        <PropertyRef Name="CodePartner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_Hotel">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+    <End Role="Service" Type="Self.Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Service">
+        <PropertyRef Name="CodeHotel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_Partner">
+    <End Role="Partner" Type="Self.Partner" Multiplicity="0..1" />
+    <End Role="Service" Type="Self.Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Partner">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Service">
+        <PropertyRef Name="CodePartner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tour_Hotel">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+    <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Tour">
+        <PropertyRef Name="HotelCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tour_TourService">
+    <End Role="TourService" Type="Self.TourService" Multiplicity="1" />
+    <End Role="Tour" Type="Self.Tour" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TourService">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Tour">
+        <PropertyRef Name="Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tour_TourType">
+    <End Role="TourType" Type="Self.TourType" Multiplicity="0..1" />
+    <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TourType">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Tour">
+        <PropertyRef Name="TourType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TourApplication_ApplicationStatus">
+    <End Role="ApplicationStatus" Type="Self.ApplicationStatus" Multiplicity="0..1" />
+    <End Role="TourApplication" Type="Self.TourApplication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ApplicationStatus">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="TourApplication">
+        <PropertyRef Name="ApplicationStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TourApplication_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="TourApplication" Type="Self.TourApplication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="TourApplication">
+        <PropertyRef Name="CodeClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TourApplication_ContractClient">
+    <End Role="ContractClient" Type="Self.ContractClient" Multiplicity="0..1" />
+    <End Role="TourApplication" Type="Self.TourApplication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContractClient">
+        <PropertyRef Name="ContractCode" />
+      </Principal>
+      <Dependent Role="TourApplication">
+        <PropertyRef Name="CodeContractClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TourApplication_Partner">
+    <End Role="Partner" Type="Self.Partner" Multiplicity="0..1" />
+    <End Role="TourApplication" Type="Self.TourApplication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Partner">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="TourApplication">
+        <PropertyRef Name="CodePartner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VoucherApplication_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="VoucherApplication" Type="Self.VoucherApplication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="VoucherApplication">
+        <PropertyRef Name="CodeClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VoucherApplication_ContractClient">
+    <End Role="ContractClient" Type="Self.ContractClient" Multiplicity="0..1" />
+    <End Role="VoucherApplication" Type="Self.VoucherApplication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContractClient">
+        <PropertyRef Name="ContractCode" />
+      </Principal>
+      <Dependent Role="VoucherApplication">
+        <PropertyRef Name="CodeClientContract" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VoucherApplication_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
+    <End Role="VoucherApplication" Type="Self.VoucherApplication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="VoucherApplication">
+        <PropertyRef Name="CodeService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BolotinTourModelStoreContainer">
+    <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContractClient" EntityType="Self.ContractClient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employer" EntityType="Self.Employer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HotelPhoto" EntityType="Self.HotelPhoto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HotelReview" EntityType="Self.HotelReview" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Partner" EntityType="Self.Partner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartnerContract" EntityType="Self.PartnerContract" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartnerType" EntityType="Self.PartnerType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tour" EntityType="Self.Tour" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TourApplication" EntityType="Self.TourApplication" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TourService" EntityType="Self.TourService" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TourType" EntityType="Self.TourType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VoucherApplication" EntityType="Self.VoucherApplication" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Client_Gender" Association="Self.FK_Client_Gender">
+      <End Role="Gender" EntitySet="Gender" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractClient_Employer" Association="Self.FK_ContractClient_Employer">
+      <End Role="Employer" EntitySet="Employer" />
+      <End Role="ContractClient" EntitySet="ContractClient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hotel_Country" Association="Self.FK_Hotel_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Hotel" EntitySet="Hotel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hotel_Partner" Association="Self.FK_Hotel_Partner">
+      <End Role="Partner" EntitySet="Partner" />
+      <End Role="Hotel" EntitySet="Hotel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HotelPhoto_Hotel" Association="Self.FK_HotelPhoto_Hotel">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="HotelPhoto" EntitySet="HotelPhoto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HotelReview_Client" Association="Self.FK_HotelReview_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="HotelReview" EntitySet="HotelReview" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HotelReview_Hotel" Association="Self.FK_HotelReview_Hotel">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="HotelReview" EntitySet="HotelReview" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Partner_PartnerType" Association="Self.FK_Partner_PartnerType">
+      <End Role="PartnerType" EntitySet="PartnerType" />
+      <End Role="Partner" EntitySet="Partner" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PartnerContract_Partner" Association="Self.FK_PartnerContract_Partner">
+      <End Role="Partner" EntitySet="Partner" />
+      <End Role="PartnerContract" EntitySet="PartnerContract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_Hotel" Association="Self.FK_Service_Hotel">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="Service" EntitySet="Service" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_Partner" Association="Self.FK_Service_Partner">
+      <End Role="Partner" EntitySet="Partner" />
+      <End Role="Service" EntitySet="Service" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tour_Hotel" Association="Self.FK_Tour_Hotel">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="Tour" EntitySet="Tour" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tour_TourService" Association="Self.FK_Tour_TourService">
+      <End Role="TourService" EntitySet="TourService" />
+      <End Role="Tour" EntitySet="Tour" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tour_TourType" Association="Self.FK_Tour_TourType">
+      <End Role="TourType" EntitySet="TourType" />
+      <End Role="Tour" EntitySet="Tour" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TourApplication_ApplicationStatus" Association="Self.FK_TourApplication_ApplicationStatus">
+      <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
+      <End Role="TourApplication" EntitySet="TourApplication" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TourApplication_Client" Association="Self.FK_TourApplication_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="TourApplication" EntitySet="TourApplication" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TourApplication_ContractClient" Association="Self.FK_TourApplication_ContractClient">
+      <End Role="ContractClient" EntitySet="ContractClient" />
+      <End Role="TourApplication" EntitySet="TourApplication" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TourApplication_Partner" Association="Self.FK_TourApplication_Partner">
+      <End Role="Partner" EntitySet="Partner" />
+      <End Role="TourApplication" EntitySet="TourApplication" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VoucherApplication_Client" Association="Self.FK_VoucherApplication_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="VoucherApplication" EntitySet="VoucherApplication" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VoucherApplication_ContractClient" Association="Self.FK_VoucherApplication_ContractClient">
+      <End Role="ContractClient" EntitySet="ContractClient" />
+      <End Role="VoucherApplication" EntitySet="VoucherApplication" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VoucherApplication_Service" Association="Self.FK_VoucherApplication_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="VoucherApplication" EntitySet="VoucherApplication" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
