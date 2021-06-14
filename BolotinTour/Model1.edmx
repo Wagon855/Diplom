@@ -1,0 +1,1488 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BolotinTourModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ApplicationStatus">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO" Type="varchar" MaxLength="100" />
+          <Property Name="Passport" Type="varchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="RegisterDate" Type="date" />
+          <Property Name="Policy" Type="varchar" MaxLength="50" />
+          <Property Name="Gender" Type="varchar" MaxLength="1" />
+          <Property Name="InternationalPass" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ContractClient">
+          <Key>
+            <PropertyRef Name="ContractCode" />
+          </Key>
+          <Property Name="ContractCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContractNumber" Type="varchar" MaxLength="50" />
+          <Property Name="ContractDate" Type="date" />
+          <Property Name="ContractPrice" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+          <Property Name="HotelName" Type="varchar" MaxLength="50" />
+          <Property Name="ContractEmployerCode" Type="varchar" MaxLength="50" />
+          <Property Name="ClientCode" Type="int" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryCode" />
+          </Key>
+          <Property Name="CountryCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Flag" Type="binary" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="INN" Type="varchar" MaxLength="50" />
+          <Property Name="KPP" Type="varchar" MaxLength="50" />
+          <Property Name="ОГРН" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employer">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="varchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Position" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="PartnerCode" Type="int" />
+          <Property Name="Stars" Type="int" />
+          <Property Name="CountryCode" Type="int" />
+          <Property Name="CodeHotelPhoto" Type="int" />
+          <Property Name="CodeHotelReview" Type="int" />
+          <Property Name="Place" Type="int" />
+          <Property Name="Adress" Type="varchar" MaxLength="100" />
+          <Property Name="Parking" Type="varchar" MaxLength="50" />
+          <Property Name="Transfer" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HotelPhoto">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodeHotel" Type="int" />
+          <Property Name="Preview" Type="binary" MaxLength="50" />
+          <Property Name="PhotoLink" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="HotelReview">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodeHotel" Type="int" />
+          <Property Name="ClientCode" Type="int" Nullable="false" />
+          <Property Name="Review" Type="varchar" MaxLength="1000" />
+          <Property Name="PhotoReview" Type="binary" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Partner">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Adress" Type="varchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="MainContract" Type="int" />
+          <Property Name="PartnerType" Type="int" />
+        </EntityType>
+        <EntityType Name="PartnerContract">
+          <Key>
+            <PropertyRef Name="ContractCode" />
+          </Key>
+          <Property Name="ContractCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodePartner" Type="int" />
+          <Property Name="ContractDate" Type="date" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="DateExpiration" Type="date" />
+        </EntityType>
+        <EntityType Name="PartnerType">
+          <Key>
+            <PropertyRef Name="CodePartner" />
+          </Key>
+          <Property Name="CodePartner" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodeReservation" Type="varchar" MaxLength="50" />
+          <Property Name="FIO" Type="varchar" MaxLength="100" />
+          <Property Name="ArrivalDate" Type="date" />
+          <Property Name="Room" Type="int" />
+          <Property Name="Days" Type="int" />
+          <Property Name="Nights" Type="int" />
+          <Property Name="PricePerNight" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="ReservationPrice" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="HotelName" Type="varchar" MaxLength="50" />
+          <Property Name="FoodType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="CodePartner" Type="int" />
+          <Property Name="CodeHotel" Type="int" />
+          <Property Name="PartnerPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tour">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TourName" Type="varchar" MaxLength="100" />
+          <Property Name="TourDescription" Type="varchar" MaxLength="1000" />
+          <Property Name="Photo" Type="binary" MaxLength="50" />
+          <Property Name="TourType" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="HotelCode" Type="int" />
+        </EntityType>
+        <EntityType Name="TourApplication">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="CodeClient" Type="int" />
+          <Property Name="CodeContractClient" Type="int" />
+          <Property Name="CodePartner" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="ApplicationStatus" Type="int" />
+          <Property Name="Commentary" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="TourService">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ToControl" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TourType">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="TourTypeDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Photo" Type="binary" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="VoucherApplication">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodeApplication" Type="int" />
+          <Property Name="DateApplication" Type="date" />
+          <Property Name="CodeClient" Type="int" />
+          <Property Name="CodeClientContract" Type="int" />
+          <Property Name="CodeService" Type="int" />
+          <Property Name="Voucher" Type="binary" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Client_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractClient_Employer">
+          <End Role="Employer" Type="Self.Employer" Multiplicity="0..1" />
+          <End Role="ContractClient" Type="Self.ContractClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employer">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="ContractClient">
+              <PropertyRef Name="ContractEmployerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hotel_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryCode" />
+            </Principal>
+            <Dependent Role="Hotel">
+              <PropertyRef Name="CountryCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hotel_Partner">
+          <End Role="Partner" Type="Self.Partner" Multiplicity="0..1" />
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Hotel">
+              <PropertyRef Name="PartnerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HotelPhoto_Hotel">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="HotelPhoto" Type="Self.HotelPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="HotelPhoto">
+              <PropertyRef Name="CodeHotel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HotelReview_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="HotelReview" Type="Self.HotelReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="HotelReview">
+              <PropertyRef Name="ClientCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HotelReview_Hotel">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="HotelReview" Type="Self.HotelReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="HotelReview">
+              <PropertyRef Name="CodeHotel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partner_PartnerType">
+          <End Role="PartnerType" Type="Self.PartnerType" Multiplicity="0..1" />
+          <End Role="Partner" Type="Self.Partner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartnerType">
+              <PropertyRef Name="CodePartner" />
+            </Principal>
+            <Dependent Role="Partner">
+              <PropertyRef Name="PartnerType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerContract_Partner">
+          <End Role="Partner" Type="Self.Partner" Multiplicity="0..1" />
+          <End Role="PartnerContract" Type="Self.PartnerContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="PartnerContract">
+              <PropertyRef Name="CodePartner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Hotel">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="CodeHotel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Partner">
+          <End Role="Partner" Type="Self.Partner" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="CodePartner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tour_Hotel">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Tour">
+              <PropertyRef Name="HotelCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tour_TourService">
+          <End Role="TourService" Type="Self.TourService" Multiplicity="1" />
+          <End Role="Tour" Type="Self.Tour" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TourService">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Tour">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tour_TourType">
+          <End Role="TourType" Type="Self.TourType" Multiplicity="0..1" />
+          <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TourType">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Tour">
+              <PropertyRef Name="TourType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TourApplication_ApplicationStatus">
+          <End Role="ApplicationStatus" Type="Self.ApplicationStatus" Multiplicity="0..1" />
+          <End Role="TourApplication" Type="Self.TourApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationStatus">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="TourApplication">
+              <PropertyRef Name="ApplicationStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TourApplication_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="TourApplication" Type="Self.TourApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="TourApplication">
+              <PropertyRef Name="CodeClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TourApplication_ContractClient">
+          <End Role="ContractClient" Type="Self.ContractClient" Multiplicity="0..1" />
+          <End Role="TourApplication" Type="Self.TourApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractClient">
+              <PropertyRef Name="ContractCode" />
+            </Principal>
+            <Dependent Role="TourApplication">
+              <PropertyRef Name="CodeContractClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TourApplication_Partner">
+          <End Role="Partner" Type="Self.Partner" Multiplicity="0..1" />
+          <End Role="TourApplication" Type="Self.TourApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="TourApplication">
+              <PropertyRef Name="CodePartner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoucherApplication_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="VoucherApplication" Type="Self.VoucherApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="VoucherApplication">
+              <PropertyRef Name="CodeClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoucherApplication_ContractClient">
+          <End Role="ContractClient" Type="Self.ContractClient" Multiplicity="0..1" />
+          <End Role="VoucherApplication" Type="Self.VoucherApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractClient">
+              <PropertyRef Name="ContractCode" />
+            </Principal>
+            <Dependent Role="VoucherApplication">
+              <PropertyRef Name="CodeClientContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoucherApplication_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
+          <End Role="VoucherApplication" Type="Self.VoucherApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="VoucherApplication">
+              <PropertyRef Name="CodeService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BolotinTourModelStoreContainer">
+          <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractClient" EntityType="Self.ContractClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employer" EntityType="Self.Employer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelPhoto" EntityType="Self.HotelPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HotelReview" EntityType="Self.HotelReview" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partner" EntityType="Self.Partner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartnerContract" EntityType="Self.PartnerContract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartnerType" EntityType="Self.PartnerType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tour" EntityType="Self.Tour" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TourApplication" EntityType="Self.TourApplication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TourService" EntityType="Self.TourService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TourType" EntityType="Self.TourType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VoucherApplication" EntityType="Self.VoucherApplication" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Client_Gender" Association="Self.FK_Client_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractClient_Employer" Association="Self.FK_ContractClient_Employer">
+            <End Role="Employer" EntitySet="Employer" />
+            <End Role="ContractClient" EntitySet="ContractClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hotel_Country" Association="Self.FK_Hotel_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Hotel" EntitySet="Hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hotel_Partner" Association="Self.FK_Hotel_Partner">
+            <End Role="Partner" EntitySet="Partner" />
+            <End Role="Hotel" EntitySet="Hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HotelPhoto_Hotel" Association="Self.FK_HotelPhoto_Hotel">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="HotelPhoto" EntitySet="HotelPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HotelReview_Client" Association="Self.FK_HotelReview_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="HotelReview" EntitySet="HotelReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HotelReview_Hotel" Association="Self.FK_HotelReview_Hotel">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="HotelReview" EntitySet="HotelReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partner_PartnerType" Association="Self.FK_Partner_PartnerType">
+            <End Role="PartnerType" EntitySet="PartnerType" />
+            <End Role="Partner" EntitySet="Partner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerContract_Partner" Association="Self.FK_PartnerContract_Partner">
+            <End Role="Partner" EntitySet="Partner" />
+            <End Role="PartnerContract" EntitySet="PartnerContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Hotel" Association="Self.FK_Service_Hotel">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Partner" Association="Self.FK_Service_Partner">
+            <End Role="Partner" EntitySet="Partner" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tour_Hotel" Association="Self.FK_Tour_Hotel">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="Tour" EntitySet="Tour" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tour_TourService" Association="Self.FK_Tour_TourService">
+            <End Role="TourService" EntitySet="TourService" />
+            <End Role="Tour" EntitySet="Tour" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tour_TourType" Association="Self.FK_Tour_TourType">
+            <End Role="TourType" EntitySet="TourType" />
+            <End Role="Tour" EntitySet="Tour" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TourApplication_ApplicationStatus" Association="Self.FK_TourApplication_ApplicationStatus">
+            <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
+            <End Role="TourApplication" EntitySet="TourApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TourApplication_Client" Association="Self.FK_TourApplication_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="TourApplication" EntitySet="TourApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TourApplication_ContractClient" Association="Self.FK_TourApplication_ContractClient">
+            <End Role="ContractClient" EntitySet="ContractClient" />
+            <End Role="TourApplication" EntitySet="TourApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TourApplication_Partner" Association="Self.FK_TourApplication_Partner">
+            <End Role="Partner" EntitySet="Partner" />
+            <End Role="TourApplication" EntitySet="TourApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoucherApplication_Client" Association="Self.FK_VoucherApplication_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="VoucherApplication" EntitySet="VoucherApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoucherApplication_ContractClient" Association="Self.FK_VoucherApplication_ContractClient">
+            <End Role="ContractClient" EntitySet="ContractClient" />
+            <End Role="VoucherApplication" EntitySet="VoucherApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoucherApplication_Service" Association="Self.FK_VoucherApplication_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="VoucherApplication" EntitySet="VoucherApplication" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BolotinTourModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BolotinTourEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ApplicationStatus" EntityType="BolotinTourModel.ApplicationStatus" />
+          <EntitySet Name="Client" EntityType="BolotinTourModel.Client" />
+          <EntitySet Name="ContractClient" EntityType="BolotinTourModel.ContractClient" />
+          <EntitySet Name="Country" EntityType="BolotinTourModel.Country" />
+          <EntitySet Name="Customer" EntityType="BolotinTourModel.Customer" />
+          <EntitySet Name="Employer" EntityType="BolotinTourModel.Employer" />
+          <EntitySet Name="Gender" EntityType="BolotinTourModel.Gender" />
+          <EntitySet Name="Hotel" EntityType="BolotinTourModel.Hotel" />
+          <EntitySet Name="HotelPhoto" EntityType="BolotinTourModel.HotelPhoto" />
+          <EntitySet Name="HotelReview" EntityType="BolotinTourModel.HotelReview" />
+          <EntitySet Name="Partner" EntityType="BolotinTourModel.Partner" />
+          <EntitySet Name="PartnerContract" EntityType="BolotinTourModel.PartnerContract" />
+          <EntitySet Name="PartnerType" EntityType="BolotinTourModel.PartnerType" />
+          <EntitySet Name="Reservation" EntityType="BolotinTourModel.Reservation" />
+          <EntitySet Name="Service" EntityType="BolotinTourModel.Service" />
+          <EntitySet Name="sysdiagrams" EntityType="BolotinTourModel.sysdiagrams" />
+          <EntitySet Name="Tour" EntityType="BolotinTourModel.Tour" />
+          <EntitySet Name="TourApplication" EntityType="BolotinTourModel.TourApplication" />
+          <EntitySet Name="TourService" EntityType="BolotinTourModel.TourService" />
+          <EntitySet Name="TourType" EntityType="BolotinTourModel.TourType" />
+          <EntitySet Name="VoucherApplication" EntityType="BolotinTourModel.VoucherApplication" />
+          <AssociationSet Name="FK_TourApplication_ApplicationStatus" Association="BolotinTourModel.FK_TourApplication_ApplicationStatus">
+            <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
+            <End Role="TourApplication" EntitySet="TourApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Gender" Association="BolotinTourModel.FK_Client_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HotelReview_Client" Association="BolotinTourModel.FK_HotelReview_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="HotelReview" EntitySet="HotelReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TourApplication_Client" Association="BolotinTourModel.FK_TourApplication_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="TourApplication" EntitySet="TourApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoucherApplication_Client" Association="BolotinTourModel.FK_VoucherApplication_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="VoucherApplication" EntitySet="VoucherApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractClient_Employer" Association="BolotinTourModel.FK_ContractClient_Employer">
+            <End Role="Employer" EntitySet="Employer" />
+            <End Role="ContractClient" EntitySet="ContractClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TourApplication_ContractClient" Association="BolotinTourModel.FK_TourApplication_ContractClient">
+            <End Role="ContractClient" EntitySet="ContractClient" />
+            <End Role="TourApplication" EntitySet="TourApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoucherApplication_ContractClient" Association="BolotinTourModel.FK_VoucherApplication_ContractClient">
+            <End Role="ContractClient" EntitySet="ContractClient" />
+            <End Role="VoucherApplication" EntitySet="VoucherApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hotel_Country" Association="BolotinTourModel.FK_Hotel_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Hotel" EntitySet="Hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hotel_Partner" Association="BolotinTourModel.FK_Hotel_Partner">
+            <End Role="Partner" EntitySet="Partner" />
+            <End Role="Hotel" EntitySet="Hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HotelPhoto_Hotel" Association="BolotinTourModel.FK_HotelPhoto_Hotel">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="HotelPhoto" EntitySet="HotelPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HotelReview_Hotel" Association="BolotinTourModel.FK_HotelReview_Hotel">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="HotelReview" EntitySet="HotelReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Hotel" Association="BolotinTourModel.FK_Service_Hotel">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tour_Hotel" Association="BolotinTourModel.FK_Tour_Hotel">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="Tour" EntitySet="Tour" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partner_PartnerType" Association="BolotinTourModel.FK_Partner_PartnerType">
+            <End Role="PartnerType" EntitySet="PartnerType" />
+            <End Role="Partner" EntitySet="Partner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerContract_Partner" Association="BolotinTourModel.FK_PartnerContract_Partner">
+            <End Role="Partner" EntitySet="Partner" />
+            <End Role="PartnerContract" EntitySet="PartnerContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Partner" Association="BolotinTourModel.FK_Service_Partner">
+            <End Role="Partner" EntitySet="Partner" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TourApplication_Partner" Association="BolotinTourModel.FK_TourApplication_Partner">
+            <End Role="Partner" EntitySet="Partner" />
+            <End Role="TourApplication" EntitySet="TourApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoucherApplication_Service" Association="BolotinTourModel.FK_VoucherApplication_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="VoucherApplication" EntitySet="VoucherApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tour_TourService" Association="BolotinTourModel.FK_Tour_TourService">
+            <End Role="TourService" EntitySet="TourService" />
+            <End Role="Tour" EntitySet="Tour" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tour_TourType" Association="BolotinTourModel.FK_Tour_TourType">
+            <End Role="TourType" EntitySet="TourType" />
+            <End Role="Tour" EntitySet="Tour" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ApplicationStatus">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TourApplication" Relationship="BolotinTourModel.FK_TourApplication_ApplicationStatus" FromRole="ApplicationStatus" ToRole="TourApplication" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Passport" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RegisterDate" Type="DateTime" Precision="0" />
+          <Property Name="Policy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="InternationalPass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Gender1" Relationship="BolotinTourModel.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
+          <NavigationProperty Name="HotelReview" Relationship="BolotinTourModel.FK_HotelReview_Client" FromRole="Client" ToRole="HotelReview" />
+          <NavigationProperty Name="TourApplication" Relationship="BolotinTourModel.FK_TourApplication_Client" FromRole="Client" ToRole="TourApplication" />
+          <NavigationProperty Name="VoucherApplication" Relationship="BolotinTourModel.FK_VoucherApplication_Client" FromRole="Client" ToRole="VoucherApplication" />
+        </EntityType>
+        <EntityType Name="ContractClient">
+          <Key>
+            <PropertyRef Name="ContractCode" />
+          </Key>
+          <Property Name="ContractCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContractDate" Type="DateTime" Precision="0" />
+          <Property Name="ContractPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HotelName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContractEmployerCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientCode" Type="Int32" />
+          <NavigationProperty Name="Employer" Relationship="BolotinTourModel.FK_ContractClient_Employer" FromRole="ContractClient" ToRole="Employer" />
+          <NavigationProperty Name="TourApplication" Relationship="BolotinTourModel.FK_TourApplication_ContractClient" FromRole="ContractClient" ToRole="TourApplication" />
+          <NavigationProperty Name="VoucherApplication" Relationship="BolotinTourModel.FK_VoucherApplication_ContractClient" FromRole="ContractClient" ToRole="VoucherApplication" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryCode" />
+          </Key>
+          <Property Name="CountryCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Flag" Type="Binary" MaxLength="50" FixedLength="true" />
+          <NavigationProperty Name="Hotel" Relationship="BolotinTourModel.FK_Hotel_Country" FromRole="Country" ToRole="Hotel" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="INN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KPP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ОГРН" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Employer">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ContractClient" Relationship="BolotinTourModel.FK_ContractClient_Employer" FromRole="Employer" ToRole="ContractClient" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Client" Relationship="BolotinTourModel.FK_Client_Gender" FromRole="Gender" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartnerCode" Type="Int32" />
+          <Property Name="Stars" Type="Int32" />
+          <Property Name="CountryCode" Type="Int32" />
+          <Property Name="CodeHotelPhoto" Type="Int32" />
+          <Property Name="CodeHotelReview" Type="Int32" />
+          <Property Name="Place" Type="Int32" />
+          <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Parking" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Transfer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Country" Relationship="BolotinTourModel.FK_Hotel_Country" FromRole="Hotel" ToRole="Country" />
+          <NavigationProperty Name="Partner" Relationship="BolotinTourModel.FK_Hotel_Partner" FromRole="Hotel" ToRole="Partner" />
+          <NavigationProperty Name="HotelPhoto" Relationship="BolotinTourModel.FK_HotelPhoto_Hotel" FromRole="Hotel" ToRole="HotelPhoto" />
+          <NavigationProperty Name="HotelReview" Relationship="BolotinTourModel.FK_HotelReview_Hotel" FromRole="Hotel" ToRole="HotelReview" />
+          <NavigationProperty Name="Service" Relationship="BolotinTourModel.FK_Service_Hotel" FromRole="Hotel" ToRole="Service" />
+          <NavigationProperty Name="Tour" Relationship="BolotinTourModel.FK_Tour_Hotel" FromRole="Hotel" ToRole="Tour" />
+        </EntityType>
+        <EntityType Name="HotelPhoto">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodeHotel" Type="Int32" />
+          <Property Name="Preview" Type="Binary" MaxLength="50" FixedLength="true" />
+          <Property Name="PhotoLink" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Hotel" Relationship="BolotinTourModel.FK_HotelPhoto_Hotel" FromRole="HotelPhoto" ToRole="Hotel" />
+        </EntityType>
+        <EntityType Name="HotelReview">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodeHotel" Type="Int32" />
+          <Property Name="ClientCode" Type="Int32" Nullable="false" />
+          <Property Name="Review" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="PhotoReview" Type="Binary" MaxLength="50" FixedLength="true" />
+          <NavigationProperty Name="Client" Relationship="BolotinTourModel.FK_HotelReview_Client" FromRole="HotelReview" ToRole="Client" />
+          <NavigationProperty Name="Hotel" Relationship="BolotinTourModel.FK_HotelReview_Hotel" FromRole="HotelReview" ToRole="Hotel" />
+        </EntityType>
+        <EntityType Name="Partner">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MainContract" Type="Int32" />
+          <Property Name="PartnerType" Type="Int32" />
+          <NavigationProperty Name="Hotel" Relationship="BolotinTourModel.FK_Hotel_Partner" FromRole="Partner" ToRole="Hotel" />
+          <NavigationProperty Name="PartnerType1" Relationship="BolotinTourModel.FK_Partner_PartnerType" FromRole="Partner" ToRole="PartnerType" />
+          <NavigationProperty Name="PartnerContract" Relationship="BolotinTourModel.FK_PartnerContract_Partner" FromRole="Partner" ToRole="PartnerContract" />
+          <NavigationProperty Name="Service" Relationship="BolotinTourModel.FK_Service_Partner" FromRole="Partner" ToRole="Service" />
+          <NavigationProperty Name="TourApplication" Relationship="BolotinTourModel.FK_TourApplication_Partner" FromRole="Partner" ToRole="TourApplication" />
+        </EntityType>
+        <EntityType Name="PartnerContract">
+          <Key>
+            <PropertyRef Name="ContractCode" />
+          </Key>
+          <Property Name="ContractCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodePartner" Type="Int32" />
+          <Property Name="ContractDate" Type="DateTime" Precision="0" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateExpiration" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Partner" Relationship="BolotinTourModel.FK_PartnerContract_Partner" FromRole="PartnerContract" ToRole="Partner" />
+        </EntityType>
+        <EntityType Name="PartnerType">
+          <Key>
+            <PropertyRef Name="CodePartner" />
+          </Key>
+          <Property Name="CodePartner" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Partner" Relationship="BolotinTourModel.FK_Partner_PartnerType" FromRole="PartnerType" ToRole="Partner" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodeReservation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FIO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ArrivalDate" Type="DateTime" Precision="0" />
+          <Property Name="Room" Type="Int32" />
+          <Property Name="Days" Type="Int32" />
+          <Property Name="Nights" Type="Int32" />
+          <Property Name="PricePerNight" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ReservationPrice" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="HotelName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FoodType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CodePartner" Type="Int32" />
+          <Property Name="CodeHotel" Type="Int32" />
+          <Property Name="PartnerPrice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="Hotel" Relationship="BolotinTourModel.FK_Service_Hotel" FromRole="Service" ToRole="Hotel" />
+          <NavigationProperty Name="Partner" Relationship="BolotinTourModel.FK_Service_Partner" FromRole="Service" ToRole="Partner" />
+          <NavigationProperty Name="VoucherApplication" Relationship="BolotinTourModel.FK_VoucherApplication_Service" FromRole="Service" ToRole="VoucherApplication" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tour">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TourName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TourDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="50" FixedLength="true" />
+          <Property Name="TourType" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="HotelCode" Type="Int32" />
+          <NavigationProperty Name="Hotel" Relationship="BolotinTourModel.FK_Tour_Hotel" FromRole="Tour" ToRole="Hotel" />
+          <NavigationProperty Name="TourService" Relationship="BolotinTourModel.FK_Tour_TourService" FromRole="Tour" ToRole="TourService" />
+          <NavigationProperty Name="TourType1" Relationship="BolotinTourModel.FK_Tour_TourType" FromRole="Tour" ToRole="TourType" />
+        </EntityType>
+        <EntityType Name="TourApplication">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="CodeClient" Type="Int32" />
+          <Property Name="CodeContractClient" Type="Int32" />
+          <Property Name="CodePartner" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ApplicationStatus" Type="Int32" />
+          <Property Name="Commentary" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ApplicationStatus1" Relationship="BolotinTourModel.FK_TourApplication_ApplicationStatus" FromRole="TourApplication" ToRole="ApplicationStatus" />
+          <NavigationProperty Name="Client" Relationship="BolotinTourModel.FK_TourApplication_Client" FromRole="TourApplication" ToRole="Client" />
+          <NavigationProperty Name="ContractClient" Relationship="BolotinTourModel.FK_TourApplication_ContractClient" FromRole="TourApplication" ToRole="ContractClient" />
+          <NavigationProperty Name="Partner" Relationship="BolotinTourModel.FK_TourApplication_Partner" FromRole="TourApplication" ToRole="Partner" />
+        </EntityType>
+        <EntityType Name="TourService">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ToControl" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tour" Relationship="BolotinTourModel.FK_Tour_TourService" FromRole="TourService" ToRole="Tour" />
+        </EntityType>
+        <EntityType Name="TourType">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TourTypeDescription" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="50" FixedLength="true" />
+          <NavigationProperty Name="Tour" Relationship="BolotinTourModel.FK_Tour_TourType" FromRole="TourType" ToRole="Tour" />
+        </EntityType>
+        <EntityType Name="VoucherApplication">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodeApplication" Type="Int32" />
+          <Property Name="DateApplication" Type="DateTime" Precision="0" />
+          <Property Name="CodeClient" Type="Int32" />
+          <Property Name="CodeClientContract" Type="Int32" />
+          <Property Name="CodeService" Type="Int32" />
+          <Property Name="Voucher" Type="Binary" MaxLength="50" FixedLength="true" />
+          <NavigationProperty Name="Client" Relationship="BolotinTourModel.FK_VoucherApplication_Client" FromRole="VoucherApplication" ToRole="Client" />
+          <NavigationProperty Name="ContractClient" Relationship="BolotinTourModel.FK_VoucherApplication_ContractClient" FromRole="VoucherApplication" ToRole="ContractClient" />
+          <NavigationProperty Name="Service" Relationship="BolotinTourModel.FK_VoucherApplication_Service" FromRole="VoucherApplication" ToRole="Service" />
+        </EntityType>
+        <Association Name="FK_TourApplication_ApplicationStatus">
+          <End Type="BolotinTourModel.ApplicationStatus" Role="ApplicationStatus" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.TourApplication" Role="TourApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationStatus">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="TourApplication">
+              <PropertyRef Name="ApplicationStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Gender">
+          <End Type="BolotinTourModel.Gender" Role="Gender" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HotelReview_Client">
+          <End Type="BolotinTourModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="BolotinTourModel.HotelReview" Role="HotelReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="HotelReview">
+              <PropertyRef Name="ClientCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TourApplication_Client">
+          <End Type="BolotinTourModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.TourApplication" Role="TourApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="TourApplication">
+              <PropertyRef Name="CodeClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoucherApplication_Client">
+          <End Type="BolotinTourModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.VoucherApplication" Role="VoucherApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="VoucherApplication">
+              <PropertyRef Name="CodeClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractClient_Employer">
+          <End Type="BolotinTourModel.Employer" Role="Employer" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.ContractClient" Role="ContractClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employer">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="ContractClient">
+              <PropertyRef Name="ContractEmployerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TourApplication_ContractClient">
+          <End Type="BolotinTourModel.ContractClient" Role="ContractClient" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.TourApplication" Role="TourApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractClient">
+              <PropertyRef Name="ContractCode" />
+            </Principal>
+            <Dependent Role="TourApplication">
+              <PropertyRef Name="CodeContractClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoucherApplication_ContractClient">
+          <End Type="BolotinTourModel.ContractClient" Role="ContractClient" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.VoucherApplication" Role="VoucherApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractClient">
+              <PropertyRef Name="ContractCode" />
+            </Principal>
+            <Dependent Role="VoucherApplication">
+              <PropertyRef Name="CodeClientContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hotel_Country">
+          <End Type="BolotinTourModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.Hotel" Role="Hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryCode" />
+            </Principal>
+            <Dependent Role="Hotel">
+              <PropertyRef Name="CountryCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hotel_Partner">
+          <End Type="BolotinTourModel.Partner" Role="Partner" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.Hotel" Role="Hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Hotel">
+              <PropertyRef Name="PartnerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HotelPhoto_Hotel">
+          <End Type="BolotinTourModel.Hotel" Role="Hotel" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.HotelPhoto" Role="HotelPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="HotelPhoto">
+              <PropertyRef Name="CodeHotel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HotelReview_Hotel">
+          <End Type="BolotinTourModel.Hotel" Role="Hotel" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.HotelReview" Role="HotelReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="HotelReview">
+              <PropertyRef Name="CodeHotel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Hotel">
+          <End Type="BolotinTourModel.Hotel" Role="Hotel" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="CodeHotel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tour_Hotel">
+          <End Type="BolotinTourModel.Hotel" Role="Hotel" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.Tour" Role="Tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Tour">
+              <PropertyRef Name="HotelCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partner_PartnerType">
+          <End Type="BolotinTourModel.PartnerType" Role="PartnerType" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.Partner" Role="Partner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartnerType">
+              <PropertyRef Name="CodePartner" />
+            </Principal>
+            <Dependent Role="Partner">
+              <PropertyRef Name="PartnerType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerContract_Partner">
+          <End Type="BolotinTourModel.Partner" Role="Partner" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.PartnerContract" Role="PartnerContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="PartnerContract">
+              <PropertyRef Name="CodePartner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Partner">
+          <End Type="BolotinTourModel.Partner" Role="Partner" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="CodePartner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TourApplication_Partner">
+          <End Type="BolotinTourModel.Partner" Role="Partner" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.TourApplication" Role="TourApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="TourApplication">
+              <PropertyRef Name="CodePartner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoucherApplication_Service">
+          <End Type="BolotinTourModel.Service" Role="Service" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.VoucherApplication" Role="VoucherApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="VoucherApplication">
+              <PropertyRef Name="CodeService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tour_TourService">
+          <End Type="BolotinTourModel.TourService" Role="TourService" Multiplicity="1" />
+          <End Type="BolotinTourModel.Tour" Role="Tour" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TourService">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Tour">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tour_TourType">
+          <End Type="BolotinTourModel.TourType" Role="TourType" Multiplicity="0..1" />
+          <End Type="BolotinTourModel.Tour" Role="Tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TourType">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Tour">
+              <PropertyRef Name="TourType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BolotinTourModelStoreContainer" CdmEntityContainer="BolotinTourEntities">
+          <EntitySetMapping Name="ApplicationStatus">
+            <EntityTypeMapping TypeName="BolotinTourModel.ApplicationStatus">
+              <MappingFragment StoreEntitySet="ApplicationStatus">
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="BolotinTourModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="InternationalPass" ColumnName="InternationalPass" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Policy" ColumnName="Policy" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractClient">
+            <EntityTypeMapping TypeName="BolotinTourModel.ContractClient">
+              <MappingFragment StoreEntitySet="ContractClient">
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="ContractEmployerCode" ColumnName="ContractEmployerCode" />
+                <ScalarProperty Name="HotelName" ColumnName="HotelName" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="ContractPrice" ColumnName="ContractPrice" />
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+                <ScalarProperty Name="ContractNumber" ColumnName="ContractNumber" />
+                <ScalarProperty Name="ContractCode" ColumnName="ContractCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="BolotinTourModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="BolotinTourModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ОГРН" ColumnName="ОГРН" />
+                <ScalarProperty Name="KPP" ColumnName="KPP" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employer">
+            <EntityTypeMapping TypeName="BolotinTourModel.Employer">
+              <MappingFragment StoreEntitySet="Employer">
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="BolotinTourModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hotel">
+            <EntityTypeMapping TypeName="BolotinTourModel.Hotel">
+              <MappingFragment StoreEntitySet="Hotel">
+                <ScalarProperty Name="Transfer" ColumnName="Transfer" />
+                <ScalarProperty Name="Parking" ColumnName="Parking" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="CodeHotelReview" ColumnName="CodeHotelReview" />
+                <ScalarProperty Name="CodeHotelPhoto" ColumnName="CodeHotelPhoto" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="Stars" ColumnName="Stars" />
+                <ScalarProperty Name="PartnerCode" ColumnName="PartnerCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelPhoto">
+            <EntityTypeMapping TypeName="BolotinTourModel.HotelPhoto">
+              <MappingFragment StoreEntitySet="HotelPhoto">
+                <ScalarProperty Name="PhotoLink" ColumnName="PhotoLink" />
+                <ScalarProperty Name="Preview" ColumnName="Preview" />
+                <ScalarProperty Name="CodeHotel" ColumnName="CodeHotel" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotelReview">
+            <EntityTypeMapping TypeName="BolotinTourModel.HotelReview">
+              <MappingFragment StoreEntitySet="HotelReview">
+                <ScalarProperty Name="PhotoReview" ColumnName="PhotoReview" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="CodeHotel" ColumnName="CodeHotel" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partner">
+            <EntityTypeMapping TypeName="BolotinTourModel.Partner">
+              <MappingFragment StoreEntitySet="Partner">
+                <ScalarProperty Name="PartnerType" ColumnName="PartnerType" />
+                <ScalarProperty Name="MainContract" ColumnName="MainContract" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartnerContract">
+            <EntityTypeMapping TypeName="BolotinTourModel.PartnerContract">
+              <MappingFragment StoreEntitySet="PartnerContract">
+                <ScalarProperty Name="DateExpiration" ColumnName="DateExpiration" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+                <ScalarProperty Name="CodePartner" ColumnName="CodePartner" />
+                <ScalarProperty Name="ContractCode" ColumnName="ContractCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartnerType">
+            <EntityTypeMapping TypeName="BolotinTourModel.PartnerType">
+              <MappingFragment StoreEntitySet="PartnerType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CodePartner" ColumnName="CodePartner" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservation">
+            <EntityTypeMapping TypeName="BolotinTourModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="FoodType" ColumnName="FoodType" />
+                <ScalarProperty Name="HotelName" ColumnName="HotelName" />
+                <ScalarProperty Name="ReservationPrice" ColumnName="ReservationPrice" />
+                <ScalarProperty Name="PricePerNight" ColumnName="PricePerNight" />
+                <ScalarProperty Name="Nights" ColumnName="Nights" />
+                <ScalarProperty Name="Days" ColumnName="Days" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+                <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="CodeReservation" ColumnName="CodeReservation" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="BolotinTourModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="PartnerPrice" ColumnName="PartnerPrice" />
+                <ScalarProperty Name="CodeHotel" ColumnName="CodeHotel" />
+                <ScalarProperty Name="CodePartner" ColumnName="CodePartner" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BolotinTourModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tour">
+            <EntityTypeMapping TypeName="BolotinTourModel.Tour">
+              <MappingFragment StoreEntitySet="Tour">
+                <ScalarProperty Name="HotelCode" ColumnName="HotelCode" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="TourType" ColumnName="TourType" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="TourDescription" ColumnName="TourDescription" />
+                <ScalarProperty Name="TourName" ColumnName="TourName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TourApplication">
+            <EntityTypeMapping TypeName="BolotinTourModel.TourApplication">
+              <MappingFragment StoreEntitySet="TourApplication">
+                <ScalarProperty Name="Commentary" ColumnName="Commentary" />
+                <ScalarProperty Name="ApplicationStatus" ColumnName="ApplicationStatus" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CodePartner" ColumnName="CodePartner" />
+                <ScalarProperty Name="CodeContractClient" ColumnName="CodeContractClient" />
+                <ScalarProperty Name="CodeClient" ColumnName="CodeClient" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TourService">
+            <EntityTypeMapping TypeName="BolotinTourModel.TourService">
+              <MappingFragment StoreEntitySet="TourService">
+                <ScalarProperty Name="ToControl" ColumnName="ToControl" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TourType">
+            <EntityTypeMapping TypeName="BolotinTourModel.TourType">
+              <MappingFragment StoreEntitySet="TourType">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="TourTypeDescription" ColumnName="TourTypeDescription" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VoucherApplication">
+            <EntityTypeMapping TypeName="BolotinTourModel.VoucherApplication">
+              <MappingFragment StoreEntitySet="VoucherApplication">
+                <ScalarProperty Name="Voucher" ColumnName="Voucher" />
+                <ScalarProperty Name="CodeService" ColumnName="CodeService" />
+                <ScalarProperty Name="CodeClientContract" ColumnName="CodeClientContract" />
+                <ScalarProperty Name="CodeClient" ColumnName="CodeClient" />
+                <ScalarProperty Name="DateApplication" ColumnName="DateApplication" />
+                <ScalarProperty Name="CodeApplication" ColumnName="CodeApplication" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

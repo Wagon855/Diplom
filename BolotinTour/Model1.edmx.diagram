@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1f8f4c11196e4edcb84b8a9e61c2dcde" Name="Diagram1" ZoomLevel="27">
+        <EntityTypeShape EntityType="BolotinTourModel.ApplicationStatus" Width="1.5" PointX="6" PointY="23.75" />
+        <EntityTypeShape EntityType="BolotinTourModel.Client" Width="1.5" PointX="10.5" PointY="0.875" />
+        <EntityTypeShape EntityType="BolotinTourModel.ContractClient" Width="1.5" PointX="10.5" PointY="24.125" />
+        <EntityTypeShape EntityType="BolotinTourModel.Country" Width="1.5" PointX="3" PointY="6.625" />
+        <EntityTypeShape EntityType="BolotinTourModel.Customer" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BolotinTourModel.Employer" Width="1.5" PointX="8.25" PointY="24.5" />
+        <EntityTypeShape EntityType="BolotinTourModel.Gender" Width="1.5" PointX="8.25" PointY="1.75" />
+        <EntityTypeShape EntityType="BolotinTourModel.Hotel" Width="1.5" PointX="5.25" PointY="9.375" />
+        <EntityTypeShape EntityType="BolotinTourModel.HotelPhoto" Width="1.5" PointX="7.5" PointY="20.625" />
+        <EntityTypeShape EntityType="BolotinTourModel.HotelReview" Width="1.5" PointX="7.5" PointY="14.375" />
+        <EntityTypeShape EntityType="BolotinTourModel.Partner" Width="1.5" PointX="3" PointY="10" />
+        <EntityTypeShape EntityType="BolotinTourModel.PartnerContract" Width="1.5" PointX="5.25" PointY="19.625" />
+        <EntityTypeShape EntityType="BolotinTourModel.PartnerType" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="BolotinTourModel.Reservation" Width="1.5" PointX="9.75" PointY="5.75" />
+        <EntityTypeShape EntityType="BolotinTourModel.Service" Width="1.5" PointX="10.5" PointY="10.25" />
+        <EntityTypeShape EntityType="BolotinTourModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BolotinTourModel.Tour" Width="1.5" PointX="7.5" PointY="6.125" />
+        <EntityTypeShape EntityType="BolotinTourModel.TourApplication" Width="1.5" PointX="8.25" PointY="9.875" />
+        <EntityTypeShape EntityType="BolotinTourModel.TourService" Width="1.5" PointX="5.25" PointY="5.375" />
+        <EntityTypeShape EntityType="BolotinTourModel.TourType" Width="1.5" PointX="5.25" PointY="1.75" />
+        <EntityTypeShape EntityType="BolotinTourModel.VoucherApplication" Width="1.5" PointX="12.75" PointY="10.125" />
+        <AssociationConnector Association="BolotinTourModel.FK_TourApplication_ApplicationStatus" />
+        <AssociationConnector Association="BolotinTourModel.FK_Client_Gender" />
+        <AssociationConnector Association="BolotinTourModel.FK_HotelReview_Client" />
+        <AssociationConnector Association="BolotinTourModel.FK_TourApplication_Client" />
+        <AssociationConnector Association="BolotinTourModel.FK_VoucherApplication_Client" />
+        <AssociationConnector Association="BolotinTourModel.FK_ContractClient_Employer" />
+        <AssociationConnector Association="BolotinTourModel.FK_TourApplication_ContractClient" />
+        <AssociationConnector Association="BolotinTourModel.FK_VoucherApplication_ContractClient" />
+        <AssociationConnector Association="BolotinTourModel.FK_Hotel_Country" />
+        <AssociationConnector Association="BolotinTourModel.FK_Hotel_Partner" />
+        <AssociationConnector Association="BolotinTourModel.FK_HotelPhoto_Hotel" />
+        <AssociationConnector Association="BolotinTourModel.FK_HotelReview_Hotel" />
+        <AssociationConnector Association="BolotinTourModel.FK_Service_Hotel" />
+        <AssociationConnector Association="BolotinTourModel.FK_Tour_Hotel" />
+        <AssociationConnector Association="BolotinTourModel.FK_Partner_PartnerType" />
+        <AssociationConnector Association="BolotinTourModel.FK_PartnerContract_Partner" />
+        <AssociationConnector Association="BolotinTourModel.FK_Service_Partner" />
+        <AssociationConnector Association="BolotinTourModel.FK_TourApplication_Partner" />
+        <AssociationConnector Association="BolotinTourModel.FK_VoucherApplication_Service" />
+        <AssociationConnector Association="BolotinTourModel.FK_Tour_TourService" />
+        <AssociationConnector Association="BolotinTourModel.FK_Tour_TourType" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
